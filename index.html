@@ -172,93 +172,53 @@
     
     
     <article
-  id="post-1"
+  id="post-算法笔记"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
   data-scroll-reveal
 >
   <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/02/28/1/"
-    >1</a> 
-</h2>
- 
-
-      
-    </header>
      
     <div class="article-meta">
-      <a href="/2023/02/28/1/" class="article-date">
-  <time datetime="2023-02-28T14:21:13.000Z" itemprop="datePublished">2023-02-28</time>
+      <a href="/2023/02/16/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/" class="article-date">
+  <time datetime="2023-02-16T07:10:52.566Z" itemprop="datePublished">2023-02-16</time>
 </a>    
     </div>
       
     <div class="article-entry" itemprop="articleBody">
        
-   
-      <!-- reward -->
-      
-    </div>
-    
+  <h1 id="动态规划部分"><a href="#动态规划部分" class="headerlink" title="动态规划部分"></a>动态规划部分</h1><h2 id="背包问题："><a href="#背包问题：" class="headerlink" title="背包问题："></a>背包问题：</h2><p>1.<strong>01背包</strong>：f(i)(j)表示从前i个物品里面选取不超过重量为j的物品所获得的最大价值，状态转移方程为:f(i)(j)&#x3D;max(f(i-1)(j),f(i-1)(j-w(i))+v(i)).</p>
+<p>2.**完全背包 **：在01背包的基础上，每个物品的选择次数没有限制，状态转移方程为：f(i)(j)&#x3D;max(f(i-1)(j),f(i)(j-w[i])+v[i]) <em><strong>意思就是要么第i个物品一个都不选，要么就选一个，然后继续试探能否再选。</strong></em></p>
+<p>3.**多重背包 **：没掌握住QAQ,<a target="_blank" rel="noopener" href="https://www.luogu.com.cn/problem/P1077">但可以参考这个题，也是不同类型的物品，有不同的数量</a>。</p>
+<p><strong>注意</strong>：</p>
+<p>01背包是从最大容量开始往前递推，即第二层循环为for(int j&#x3D;m;j&gt;&#x3D;0;j–) *<font color="#dd0000">（不要看学习通上的那个代码）</font>*。</p>
+<hr>
+<h1 id="图论"><a href="#图论" class="headerlink" title="图论"></a>图论</h1><h3 id="I-存图方式："><a href="#I-存图方式：" class="headerlink" title="I.存图方式："></a>I.存图方式：</h3><p>1.邻接矩阵：**<font color="Red">缺点就是不能构建重边，且占用内存较大</font> **</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> u,v,w;<span class="comment">//&quot;u,v&quot; meanings the beginning and end of a edge,&quot;W&quot;meanings the assignment of this edge.</span></span><br><span class="line"><span class="type">int</span> map[N][N];</span><br><span class="line">cin&gt;&gt;u&gt;&gt;v&gt;&gt;w;</span><br><span class="line">map[u][v]=map[v][u]=w;<span class="comment">//connect the edge and give it assignment.</span></span><br></pre></td></tr></table></figure>
 
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
+<hr>
+<p>2.邻接表</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">edge</span>&#123;</span><br><span class="line">    <span class="type">int</span> v,w;</span><br><span class="line">&#125;<span class="comment">//Considering that we need to store the end point that connecting to this point and the assignment of the edge built by these two points &quot;u,v&quot;,so we use &quot;struct&quot; to be the data type of &quot;vector&quot;</span></span><br><span class="line">vector&lt;edge&gt;e[N];</span><br><span class="line">cin&gt;&gt;u&gt;&gt;v&gt;&gt;w;</span><br><span class="line">e[u].<span class="built_in">push_back</span>(&#123;v,w&#125;);</span><br><span class="line">e[v].<span class="built_in">push_back</span>(&#123;u,w&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-   
-   
-  
-</article>
+<hr>
+<p>3.<strong><font color="Green"> 链式前向星</font></strong>(目前还没有掌握住)</p>
+<hr>
+<h2 id="II-计算最短路径的方法："><a href="#II-计算最短路径的方法：" class="headerlink" title="II.计算最短路径的方法："></a>II.计算最短路径的方法：</h2><p>1.floyd算法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> f[N][N];<span class="comment">//array&quot;f&quot; meanings the shortest length of two points;</span></span><br><span class="line"><span class="type">int</span> INF=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">edge</span>&#123;</span><br><span class="line">    <span class="type">int</span> v,w;</span><br><span class="line">&#125;node[N];</span><br><span class="line"></span><br><span class="line">cin&gt;&gt;u&gt;&gt;v&gt;&gt;w;</span><br><span class="line">e[u].<span class="built_in">push_back</span>(&#123;v,w&#125;);</span><br><span class="line">e[v].<span class="built_in">push_back</span>(&#123;u,w&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">&#123;</span><br><span class="line">    f[i][i]=<span class="number">0</span>;<span class="comment">//自己到自己的距离为0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(j==i||e[i].v==j)<span class="keyword">continue</span>;<span class="comment">//如果是自己或者是和自己相连的点，就跳过。</span></span><br><span class="line">        <span class="keyword">else</span> f[i][j]=INF;<span class="comment">//不相连的话两者距离就为正无穷。</span></span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*The template:*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(<span class="type">int</span> k=<span class="number">1</span>;k&lt;=n;k++)</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">1</span>;i&lt;=n;i++)</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">1</span>;j&lt;=n;j++)</span><br><span class="line">            f[i][j]=<span class="built_in">min</span>(f[i][j],f[i][k]+f[k][j]);</span><br><span class="line">            </span><br><span class="line">            </span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-    
-    <article
-  id="post-hello-world"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2023/02/28/hello-world/"
-    >Hello World</a> 
-</h2>
- 
 
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2023/02/28/hello-world/" class="article-date">
-  <time datetime="2023-02-28T14:06:42.141Z" itemprop="datePublished">2023-02-28</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<hr>
+<hr>
+<p>2.dijkstra算法：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">edge</span> &#123;</span><br><span class="line">  <span class="type">int</span> v, w;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">vector&lt;edge&gt; e[maxn];</span><br><span class="line"><span class="type">int</span> dis[maxn], vis[maxn],INF=<span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">dijkstra</span><span class="params">(<span class="type">int</span> n, <span class="type">int</span> s)</span> </span>&#123;</span><br><span class="line">  <span class="built_in">memset</span>(dis, INF, <span class="built_in">sizeof</span>(dis));</span><br><span class="line">  dis[s] = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">    <span class="type">int</span> u = <span class="number">0</span>, mind = <span class="number">0x3f3f3f3f</span>;<span class="comment">//由于每一次都要从里起点最近的点出发寻找，所以最外层的循环需要来做这一层工作。</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">1</span>; j &lt;= n; j++)</span><br><span class="line">      <span class="keyword">if</span> (!vis[j] &amp;&amp; dis[j] &lt; mind) u = j, mind = dis[j];<span class="comment">//如果这个点没有被访问，且小于mind(第一次的时候就是表示找到了起点，然后起点到自己的距离又为0，故不会被覆盖。往后就是，如果与前一个点相连接，然后记录两点距离mind，重复寻找并覆盖，找到最小的)</span></span><br><span class="line">    vis[u] = <span class="literal">true</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> ed : e[u]) &#123;</span><br><span class="line">      <span class="type">int</span> v = ed.v, w = ed.w;<span class="comment">//从上面找到的点寻找出度点，并更新起点到这个点的最短距离。</span></span><br><span class="line">      <span class="keyword">if</span> (dis[v] &gt; dis[u] + w) dis[v] = dis[u] + w;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//优先队列优化做法：</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+
+
+<p><strong>注意</strong>：1.无穷大的表示为<font color="Blue"> max&#x3D;0x3f3f3f3f</font>,无穷小表示为<font color="Blue">min&#x3D;0xc0c0c0c0</font></p>
  
       <!-- reward -->
       
